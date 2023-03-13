@@ -22,7 +22,7 @@ def main():
     ievade = input()
     if 'F' in ievade:
         path = input()
-        path = "test/" + path
+        path = "tests/" + path
         with open(path, "r") as f:
             n = int(f.readline())
             data = list(map(int, f.readline().split()))
