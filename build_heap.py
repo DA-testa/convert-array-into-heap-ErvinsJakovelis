@@ -1,10 +1,17 @@
 # python3
 
-
+import math
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
+    for i in range(len(data)-1, 0, -1):
+        if data[1] > data[i]:
+            swaps.append([1, i])
+            data[1], data[i] = data[i], data[1]
+            i=1
+            if(data[math.floor(i/2)] > data[1]):
+                swaps.append([math.floor(i/2), 1])
+                data[math.floor(i/2)], data[1] = data[1], data[math.floor(i/2)]
+
 
 
     return swaps
@@ -12,14 +19,19 @@ def build_heap(data):
 
 def main():
     
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
+    ievade = input()
+    if 'F' in ievade:
+        path = input()
+        path = "test/" + path
+        with open(path, "r") as f:
+            n = int(f.readline())
+            data = list(map(int, f.readline().split()))
+            
+    if 'I' in ievade:
+        n = int(input())
+        data = list(map(int, input().split()))
 
-
-    # input from keyboard
-    n = int(input())
-    data = list(map(int, input().split()))
+    
 
     # checks if lenght of data is the same as the said lenght
     assert len(data) == n
