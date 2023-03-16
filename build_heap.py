@@ -1,20 +1,30 @@
 # python3
 
-import math
-def build_heap(data):
+def sift_down(arr, i, swaps):
+    min_index = i
+    left_child = 2 * i + 1
+    right_child = 2 * i + 2
+    n = len(arr)
+
+    if left_child < n and arr[left_child] < arr[min_index]:
+        min_index = left_child
+
+    if right_child < n and arr[right_child] < arr[min_index]:
+        min_index = right_child
+
+    if i != min_index:
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+        swaps.append((i, min_index))
+        sift_down(arr, min_index, swaps)
+
+
+def build_heap(arr):
     swaps = []
-    for i in range(len(data)-1, 0, -1):
-        if data[1] > data[i]:
-            swaps.append([1, i])
-            data[1], data[i] = data[i], data[1]
-            i=1
-            if(data[math.floor(i/2)] > data[1]):
-                swaps.append([math.floor(i/2), 1])
-                data[math.floor(i/2)], data[1] = data[1], data[math.floor(i/2)]
-
-
-
+    n = len(arr)
+    for i in range(n // 2, -1, -1):
+        sift_down(arr, i, swaps)
     return swaps
+
 
 
 def main():
@@ -32,19 +42,13 @@ def main():
         data = list(map(int, input().split()))
 
     
-
-    # checks if lenght of data is the same as the said lenght
     assert len(data) == n
 
-    # calls function to assess the data 
-    # and give back all swaps
     swaps = build_heap(data)
 
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
 
 
-    # output all swaps
+
     print(len(swaps))
     for i, j in swaps:
         print(i, j)
