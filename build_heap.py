@@ -1,21 +1,21 @@
 # python3
 
 def sift_down(arr, i, swaps):
-    min_index = i
-    left_child = 2 * i + 1
-    right_child = 2 * i + 2
-    n = len(arr)
+    min = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+    length = len(arr)
 
-    if left_child < n and arr[left_child] < arr[min_index]:
-        min_index = left_child
+    if left < length and arr[left] < arr[min]:
+        min = left
 
-    if right_child < n and arr[right_child] < arr[min_index]:
-        min_index = right_child
+    if right < length and arr[right] < arr[min]:
+        min = right
 
-    if i != min_index:
-        arr[i], arr[min_index] = arr[min_index], arr[i]
-        swaps.append((i, min_index))
-        sift_down(arr, min_index, swaps)
+    if i != min:
+        arr[i], arr[min] = arr[min], arr[i]
+        swaps.append((i, min))
+        sift_down(arr, min, swaps)
 
 
 def build_heap(arr):
